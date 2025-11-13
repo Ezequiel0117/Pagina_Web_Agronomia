@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- El título puede ser un bloque para que las páginas hijas lo cambien -->
     <title>{% block title %}Mercado Sostenible{% endblock %}</title>
     
     <!-- Tailwind CSS -->
@@ -15,72 +14,135 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-100 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Navbar -->
-    <header class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div>
-                <a href="/" class="text-3xl font-bold">Mercado Sostenible</a>
+    <!-- Navbar Mejorado -->
+    <header class="navbar-blur text-white shadow-2xl sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="logo-animate">
+                <a href="/" class="text-3xl font-bold flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    Mercado Sostenible
+                </a>
             </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="#productos-acuicolas" class="text-lg text-blue-100 hover:text-white transition-colors">Acuícolas</a>
-                <a href="#productos-pesqueros" class="text-lg text-blue-100 hover:text-white transition-colors">Pesqueros</a>
-                <a href="#productos-ganaderos" class="text-lg text-blue-100 hover:text-white transition-colors">Ganaderos</a>
-                <a href="#productos-vegetales" class="text-lg text-blue-100 hover:text-white transition-colors">Vegetales</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#productos-acuicolas" class="text-lg font-medium text-blue-100 hover:text-white transition-all duration-300 hover:scale-110">🐟 Acuícolas</a>
+                <a href="#productos-pesqueros" class="text-lg font-medium text-blue-100 hover:text-white transition-all duration-300 hover:scale-110">🦐 Pesqueros</a>
+                <a href="#productos-ganaderos" class="text-lg font-medium text-blue-100 hover:text-white transition-all duration-300 hover:scale-110">🥩 Ganaderos</a>
+                <a href="#productos-vegetales" class="text-lg font-medium text-blue-100 hover:text-white transition-all duration-300 hover:scale-110">🥬 Vegetales</a>
             </div>
-            <!-- Menú hamburguesa (simple) para móviles -->
+            <!-- Menú hamburguesa para móviles -->
             <div class="md:hidden">
-                <button class="text-white focus:outline-none">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <button id="mobile-menu-button" class="text-white focus:outline-none icon-shine">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
                 </button>
             </div>
         </nav>
+        
+        <!-- Menú móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-700 bg-opacity-95 backdrop-blur-lg">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#productos-acuicolas" class="block text-lg font-medium text-blue-100 hover:text-white transition-colors py-2">🐟 Acuícolas</a>
+                <a href="#productos-pesqueros" class="block text-lg font-medium text-blue-100 hover:text-white transition-colors py-2">🦐 Pesqueros</a>
+                <a href="#productos-ganaderos" class="block text-lg font-medium text-blue-100 hover:text-white transition-colors py-2">🥩 Ganaderos</a>
+                <a href="#productos-vegetales" class="block text-lg font-medium text-blue-100 hover:text-white transition-colors py-2">🥬 Vegetales</a>
+            </div>
+        </div>
     </header>
 
-    <!-- Contenido principal (será reemplazado por las páginas hijas) -->
+    <!-- Contenido principal -->
     <main class="flex-grow">
         {% block content %}
-        <!-- El contenido de index.html, about.html, etc., irá aquí -->
         {% endblock %}
     </main>
 
-    <!-- Footer (ahora parte de la base) -->
-    <footer class="bg-gray-800 text-gray-300 py-8 mt-auto">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 Mercado de Producción Sostenible. Todos los derechos reservados.</p>
+    <!-- Footer Mejorado -->
+    <footer class="text-gray-300 py-12 mt-auto">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Mercado Sostenible</h3>
+                    <p class="text-gray-400">Conectando productores locales con consumidores conscientes. Productos frescos y sostenibles.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#productos-acuicolas" class="text-gray-400 hover:text-white transition-colors">Productos Acuícolas</a></li>
+                        <li><a href="#productos-pesqueros" class="text-gray-400 hover:text-white transition-colors">Productos Pesqueros</a></li>
+                        <li><a href="#productos-ganaderos" class="text-gray-400 hover:text-white transition-colors">Productos Ganaderos</a></li>
+                        <li><a href="#productos-vegetales" class="text-gray-400 hover:text-white transition-colors">Productos Vegetales</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contacto</h3>
+                    <p class="text-gray-400 mb-2">📧 info@mercadosostenible.com</p>
+                    <p class="text-gray-400 mb-2">📱 +593 123 456 789</p>
+                    <p class="text-gray-400">📍 Milagro, Guayas, Ecuador</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p>&copy; 2025 Mercado de Producción Sostenible. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Botón y Ventana del Chatbot (ahora parte de la base) -->
-    <button id="chat-toggle-button" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-transform duration-300 hover:scale-110 focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <!-- Botón del Chatbot Mejorado -->
+    <button id="chat-toggle-button" class="fixed bottom-6 right-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-5 rounded-full shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-110 focus:outline-none z-40 icon-shine">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
     </button>
 
-    <div id="chat-window" class="fixed bottom-24 right-6 w-80 md:w-96 bg-white rounded-lg shadow-xl hidden transition-all duration-300">
-        <div class="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
-            <h3 class="font-bold text-lg">Asistente Virtual</h3>
-            <button id="chat-close-button" class="text-white hover:text-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+    <!-- Ventana del Chatbot Mejorada -->
+    <div id="chat-window" class="fixed bottom-24 right-6 w-80 md:w-96 hidden transition-all duration-300 z-50">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-5 rounded-t-2xl flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                <h3 class="font-bold text-lg">Asistente Virtual</h3>
+            </div>
+            <button id="chat-close-button" class="text-white hover:text-gray-200 transition-colors icon-shine">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
             </button>
         </div>
-        <div id="chat-messages" class="h-80 p-4 overflow-y-auto">
-            <div class="mb-4"><div class="bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs">¡Hola! 👋 ¿Cómo puedo ayudarte hoy?</div></div>
+        <div id="chat-messages" class="h-80 p-4 overflow-y-auto bg-gradient-to-b from-gray-50 to-white">
+            <div class="mb-4 chat-message">
+                <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-3 rounded-2xl rounded-tl-none max-w-xs shadow-md">
+                    ¡Hola! 👋 ¿Cómo puedo ayudarte hoy?
+                </div>
+            </div>
         </div>
-        <div class="p-4 border-t border-gray-200 flex">
-            <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <button id="chat-send-button" class="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-600">Enviar</button>
+        <div class="p-4 bg-white border-t border-gray-200 flex gap-2 rounded-b-2xl">
+            <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." class="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+            <button id="chat-send-button" class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-3 rounded-xl font-bold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 btn-modern shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+            </button>
         </div>
     </div>
 
-    <!-- Script del Chatbot -->
+    <!-- Script del Chatbot Mejorado -->
     <script>
-        // Todo el script del chatbot que ya teníamos va aquí
         document.addEventListener('DOMContentLoaded', () => {
+            // Toggle del menú móvil
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Chatbot
             const chatToggleButton = document.getElementById('chat-toggle-button');
             const chatWindow = document.getElementById('chat-window');
             const chatCloseButton = document.getElementById('chat-close-button');
@@ -101,31 +163,73 @@
             const sendMessage = () => {
                 const messageText = chatInput.value.trim();
                 if (messageText === '') return;
+                
                 const userMessage = document.createElement('div');
-                userMessage.classList.add('mb-4', 'flex', 'justify-end');
-                userMessage.innerHTML = `<div class="bg-blue-500 text-white p-3 rounded-lg max-w-xs">${messageText}</div>`;
+                userMessage.classList.add('mb-4', 'flex', 'justify-end', 'user-message');
+                userMessage.innerHTML = `<div class="bg-gradient-to-r from-gray-600 to-gray-700 text-white p-3 rounded-2xl rounded-tr-none max-w-xs shadow-md">${messageText}</div>`;
                 chatMessages.appendChild(userMessage);
                 chatInput.value = '';
                 chatMessages.scrollTop = chatMessages.scrollHeight;
-                setTimeout(getBotResponse, 1000, messageText.toLowerCase());
+                
+                // Indicador de escritura
+                const typingDiv = document.createElement('div');
+                typingDiv.classList.add('mb-4', 'chat-message');
+                typingDiv.id = 'typing-indicator';
+                typingDiv.innerHTML = `<div class="bg-gray-200 p-3 rounded-2xl rounded-tl-none max-w-xs"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+                chatMessages.appendChild(typingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                setTimeout(() => {
+                    document.getElementById('typing-indicator').remove();
+                    getBotResponse(messageText.toLowerCase());
+                }, 1000);
             };
 
             chatSendButton.addEventListener('click', sendMessage);
-            chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+            chatInput.addEventListener('keypress', (e) => { 
+                if (e.key === 'Enter') sendMessage(); 
+            });
 
             const getBotResponse = (userMessage) => {
                 let botReply = "No estoy seguro de cómo responder. Pregunta sobre nuestros productos (acuícolas, pesqueros, etc.)";
-                if (userMessage.includes('hola')) { botReply = "¡Hola! ¿En qué producto estás interesado hoy?"; }
-                else if (userMessage.includes('acuícola')) { botReply = "Nuestros productos acuícolas cuestan $12.50 / kg."; }
-                else if (userMessage.includes('pesquero')) { botReply = "El pescado fresco está a $18.00 / kg."; }
-                else if (userMessage.includes('ganadero')) { botReply = "La carne de res está a $9.75 / kg."; }
-                else if (userMessage.includes('vegetal')) { botReply = "Las verduras de temporada están a $3.50 / kg."; }
-                else if (userMessage.includes('precio')) { botReply = "Acuícolas ($12.50/kg), Pesqueros ($18.00/kg), Ganaderos ($9.75/kg) y Vegetales ($3.50/kg)."; }
-                else if (userMessage.includes('gracias')) { botReply = "¡De nada! Estamos para servirte."; }
+                let emoji = "🤔";
+                
+                if (userMessage.includes('hola') || userMessage.includes('buenos') || userMessage.includes('buenas')) { 
+                    botReply = "¡Hola! ¿En qué producto estás interesado hoy?"; 
+                    emoji = "👋";
+                }
+                else if (userMessage.includes('acuícola') || userMessage.includes('tilapia') || userMessage.includes('camaron')) { 
+                    botReply = "Nuestros productos acuícolas cuestan $12.50 / kg. Incluyen tilapia y camarones frescos."; 
+                    emoji = "🐟";
+                }
+                else if (userMessage.includes('pesquero') || userMessage.includes('pescado') || userMessage.includes('marisco')) { 
+                    botReply = "El pescado fresco está a $18.00 / kg. Captura responsable y local."; 
+                    emoji = "🦐";
+                }
+                else if (userMessage.includes('ganadero') || userMessage.includes('carne') || userMessage.includes('res') || userMessage.includes('pollo')) { 
+                    botReply = "La carne de res está a $9.75 / kg. Ganado criado éticamente."; 
+                    emoji = "🥩";
+                }
+                else if (userMessage.includes('vegetal') || userMessage.includes('verdura') || userMessage.includes('fruta')) { 
+                    botReply = "Las verduras de temporada están a $3.50 / kg. Sin pesticidas dañinos."; 
+                    emoji = "🥬";
+                }
+                else if (userMessage.includes('precio')) { 
+                    botReply = "Acuícolas ($12.50/kg) 🐟, Pesqueros ($18.00/kg) 🦐, Ganaderos ($9.75/kg) 🥩 y Vegetales ($3.50/kg) 🥬."; 
+                    emoji = "💰";
+                }
+                else if (userMessage.includes('gracias')) { 
+                    botReply = "¡De nada! Estamos para servirte. ¿Algo más?"; 
+                    emoji = "😊";
+                }
+                else if (userMessage.includes('ayuda') || userMessage.includes('información')) { 
+                    botReply = "Puedo ayudarte con información sobre nuestros productos, precios y disponibilidad. ¿Qué necesitas saber?"; 
+                    emoji = "ℹ️";
+                }
                 
                 const botMessage = document.createElement('div');
-                botMessage.classList.add('mb-4');
-                botMessage.innerHTML = `<div class="bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs">${botReply}</div>`;
+                botMessage.classList.add('mb-4', 'chat-message');
+                botMessage.innerHTML = `<div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-3 rounded-2xl rounded-tl-none max-w-xs shadow-md">${emoji} ${botReply}</div>`;
                 chatMessages.appendChild(botMessage);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             };

@@ -1,69 +1,188 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{# Esta página puede cambiar el título de la pestaña del navegador #}
 {% block title %}Inicio - Mercado Sostenible{% endblock %}
 
-{# Este es el contenido que se insertará en el bloque de 'base.html' #}
 {% block content %}
-    <div class="container mx-auto px-6 py-12">
-        <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Nuestros Productos</h2>
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.4&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center text-white fade-in-up">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
+                    Productos Sostenibles 
+                    <span class="block text-yellow-300">de la Tierra al Plato</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
+                    Conectamos productores locales con consumidores conscientes. Frescura garantizada y prácticas sostenibles.
+                </p>
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <a href="#productos" class="btn-modern bg-white text-blue-600 px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                        Ver Productos
+                    </a>
+                    <a href="#contacto" class="btn-modern bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300">
+                        Contáctanos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Productos -->
+    <div id="productos" class="container mx-auto px-6 py-16">
+        <div class="text-center mb-12 fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">Nuestros Productos</h2>
+            <div class="decorative-separator mb-6"></div>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Selecciona entre nuestra variedad de productos frescos, orgánicos y sostenibles
+            </p>
+        </div>
 
         <!-- Grid de Productos -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
             <!-- Producto 1: Acuícolas -->
-            <div id="productos-acuicolas" class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-                <img src="https://placehold.co/400x300/3498db/ffffff?text=Acu%C3%ADcolas" alt="Productos Acuícolas" class="w-full h-56 object-cover">
+            <div id="productos-acuicolas" class="product-card glass-card rounded-2xl shadow-xl overflow-hidden">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1544943910-4c1dc44aab44?w=400&h=300&fit=crop" alt="Productos Acuícolas" class="w-full h-56 object-cover">
+                    <div class="product-overlay"></div>
+                </div>
                 <div class="p-6">
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-2">Productos Acuícolas</h3>
-                    <p class="text-gray-600 mb-4">Tilapia, camarones y otros productos frescos criados en sistemas controlados y sostenibles.</p>
-                    <p class="text-2xl font-bold text-blue-600 mb-5">Precio: $12.50 / kg</p>
-                    <button class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
-                        Comprar Ahora
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-3xl">🐟</span>
+                        <h3 class="text-2xl font-bold text-gray-800">Acuícolas</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Tilapia, camarones y otros productos frescos criados en sistemas controlados y sostenibles.
+                    </p>
+                    <div class="mb-5">
+                        <span class="price-badge bg-gradient-to-r from-blue-500 to-purple-500 text-white text-2xl">
+                            $12.50 / kg
+                        </span>
+                    </div>
+                    <button class="btn-modern w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-purple-600 shadow-lg hover:shadow-xl transition-all duration-300">
+                        🛒 Comprar Ahora
                     </button>
                 </div>
             </div>
 
             <!-- Producto 2: Pesqueros -->
-            <div id="productos-pesqueros" class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-                <img src="https://placehold.co/400x300/1abc9c/ffffff?text=Pesqueros" alt="Productos Pesqueros" class="w-full h-56 object-cover">
+            <div id="productos-pesqueros" class="product-card glass-card rounded-2xl shadow-xl overflow-hidden">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=300&fit=crop" alt="Productos Pesqueros" class="w-full h-56 object-cover">
+                    <div class="product-overlay"></div>
+                </div>
                 <div class="p-6">
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-2">Productos Pesqueros</h3>
-                    <p class="text-gray-600 mb-4">La mejor selección de pescado y marisco capturado de forma responsable por pescadores locales.</p>
-                    <p class="text-2xl font-bold text-teal-600 mb-5">Precio: $18.00 / kg</p>
-                    <button class="w-full bg-teal-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-600 transition-colors duration-300">
-                        Comprar Ahora
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-3xl">🦐</span>
+                        <h3 class="text-2xl font-bold text-gray-800">Pesqueros</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        La mejor selección de pescado y marisco capturado de forma responsable por pescadores locales.
+                    </p>
+                    <div class="mb-5">
+                        <span class="price-badge bg-gradient-to-r from-pink-500 to-red-500 text-white text-2xl">
+                            $18.00 / kg
+                        </span>
+                    </div>
+                    <button class="btn-modern w-full bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold py-3 px-6 rounded-xl hover:from-pink-600 hover:to-red-600 shadow-lg hover:shadow-xl transition-all duration-300">
+                        🛒 Comprar Ahora
                     </button>
                 </div>
             </div>
 
             <!-- Producto 3: Ganaderos -->
-            <div id="productos-ganaderos" class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-                <img src="https://placehold.co/400x300/e74c3c/ffffff?text=Ganaderos" alt="Productos Ganaderos" class="w-full h-56 object-cover">
+            <div id="productos-ganaderos" class="product-card glass-card rounded-2xl shadow-xl overflow-hidden">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1588347818036-4c0b5e5d4949?w=400&h=300&fit=crop" alt="Productos Ganaderos" class="w-full h-56 object-cover">
+                    <div class="product-overlay"></div>
+                </div>
                 <div class="p-6">
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-2">Productos Ganaderos</h3>
-                    <p class="text-gray-600 mb-4">Carne de res, pollo, cerdo y productos lácteos de ganado criado éticamente en pastizales.</p>
-                    <p class="text-2xl font-bold text-red-600 mb-5">Precio: $9.75 / kg</p>
-                    <button class="w-full bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition-colors duration-300">
-                        Comprar Ahora
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-3xl">🥩</span>
+                        <h3 class="text-2xl font-bold text-gray-800">Ganaderos</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Carne de res, pollo, cerdo y productos lácteos de ganado criado éticamente en pastizales.
+                    </p>
+                    <div class="mb-5">
+                        <span class="price-badge bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-2xl">
+                            $9.75 / kg
+                        </span>
+                    </div>
+                    <button class="btn-modern w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold py-3 px-6 rounded-xl hover:from-cyan-600 hover:to-blue-600 shadow-lg hover:shadow-xl transition-all duration-300">
+                        🛒 Comprar Ahora
                     </button>
                 </div>
             </div>
 
             <!-- Producto 4: Vegetales -->
-            <div id="productos-vegetales" class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-                <img src="https://placehold.co/400x300/2ecc71/ffffff?text=Vegetales" alt="Productos Vegetales" class="w-full h-56 object-cover">
+            <div id="productos-vegetales" class="product-card glass-card rounded-2xl shadow-xl overflow-hidden">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop" alt="Productos Vegetales" class="w-full h-56 object-cover">
+                    <div class="product-overlay"></div>
+                </div>
                 <div class="p-6">
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-2">Productos Vegetales</h3>
-                    <p class="text-gray-600 mb-4">Frutas y verduras frescas de temporada, cultivadas localmente sin pesticidas dañinos.</p>
-                    <p class="text-2xl font-bold text-green-600 mb-5">Precio: $3.50 / kg</p>
-                    <button class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors duration-300">
-                        Comprar Ahora
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-3xl">🥬</span>
+                        <h3 class="text-2xl font-bold text-gray-800">Vegetales</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Frutas y verduras frescas de temporada, cultivadas localmente sin pesticidas dañinos.
+                    </p>
+                    <div class="mb-5">
+                        <span class="price-badge bg-gradient-to-r from-green-500 to-emerald-500 text-white text-2xl">
+                            $3.50 / kg
+                        </span>
+                    </div>
+                    <button class="btn-modern w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold py-3 px-6 rounded-xl hover:from-green-600 hover:to-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300">
+                        🛒 Comprar Ahora
                     </button>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <!-- Sección de Beneficios -->
+    <section class="bg-gradient-to-r from-blue-50 to-purple-50 py-16">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">¿Por Qué Elegirnos?</h2>
+                <div class="decorative-separator"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="text-5xl mb-4">🌱</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">100% Sostenible</h3>
+                    <p class="text-gray-600">Todos nuestros productos provienen de prácticas agrícolas sostenibles y responsables con el medio ambiente.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="text-5xl mb-4">🚚</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Entrega Rápida</h3>
+                    <p class="text-gray-600">Garantizamos la entrega de productos frescos directamente a tu puerta en menos de 24 horas.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="text-5xl mb-4">✅</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Calidad Garantizada</h3>
+                    <p class="text-gray-600">Cada producto pasa por rigurosos controles de calidad para asegurar tu satisfacción total.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-600 py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">¿Listo para Comprar Productos Sostenibles?</h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                Únete a miles de clientes satisfechos que ya disfrutan de productos frescos y sostenibles
+            </p>
+            <button class="btn-modern bg-white text-blue-600 px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                Comenzar Ahora 🚀
+            </button>
+        </div>
+    </section>
 {% endblock %}
