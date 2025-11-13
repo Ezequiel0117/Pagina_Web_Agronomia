@@ -31,19 +31,19 @@ body {
 
 /* Gradientes personalizados para cada categoría */
 .gradient-acuicola {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #A1C8E8 0%, #2B601E 100%);
 }
 
 .gradient-pesquero {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #A1C8E8 0%, #5f9ea0 100%);
 }
 
 .gradient-ganadero {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #A88D66 0%, #D1A24E 100%);
 }
 
 .gradient-vegetal {
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    background: linear-gradient(135deg, #91D956 0%, #2B601E 100%);
 }
 
 /* Efecto hover en tarjetas de producto */
@@ -136,7 +136,7 @@ body {
 .navbar-blur {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    background: rgba(37, 99, 235, 0.95);
+    background: rgba(43, 96, 30, 0.95); /* Deep Forest Green */
 }
 
 /* Animación para el logo */
@@ -159,13 +159,13 @@ body {
 }
 
 #chat-messages::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2B601E 0%, #91D956 100%);
     border-radius: 10px;
     transition: background 0.3s ease;
 }
 
 #chat-messages::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    background: linear-gradient(135deg, #91D956 0%, #2B601E 100%);
 }
 
 /* Chatbot con estilo mejorado */
@@ -175,12 +175,12 @@ body {
 }
 
 #chat-toggle-button {
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+    box-shadow: 0 8px 20px rgba(43, 96, 30, 0.4);
     transition: all 0.3s ease;
 }
 
 #chat-toggle-button:hover {
-    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.6);
+    box-shadow: 0 12px 28px rgba(43, 96, 30, 0.6);
 }
 
 /* Mensajes del chat con estilo */
@@ -238,7 +238,7 @@ body {
 
 /* Footer mejorado */
 footer {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    background: linear-gradient(135deg, #A88D66 0%, #5a4d3a 100%);
 }
 
 /* Efectos de partículas en el fondo (opcional) */
@@ -256,7 +256,7 @@ footer {
 .decorative-separator {
     width: 80px;
     height: 4px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(90deg, #2B601E 0%, #91D956 100%);
     margin: 0 auto;
     border-radius: 2px;
 }
