@@ -1,0 +1,19 @@
+/* Aplicar la fuente Inter como predeterminada */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Estilos para el scroll del chat */
+#chat-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1; /* cool-gray-300 */
+    border-radius: 20px;
+}
+
+/* Puedes añadir más estilos personalizados aquí */
+.navbar-link {
+    @apply text-lg text-blue-100 hover:text-white transition-colors;
+}

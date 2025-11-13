@@ -1,49 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mercado de Producción Sostenible</title>
-    <!-- Importación de Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Importación de la fuente Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Aplicar la fuente Inter como predeterminada */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Estilos para el scroll del chat */
-        #chat-messages::-webkit-scrollbar {
-            width: 4px;
-        }
-        #chat-messages::-webkit-scrollbar-thumb {
-            background-color: #cbd5e1; /* cool-gray-300 */
-            border-radius: 20px;
-        }
-    </style>
-</head>
-<body class="bg-gray-100">
+{% extends 'base.html' %}
+{% load static %}
 
-    <!-- Encabezado -->
-    <header class="bg-blue-600 text-white shadow-md">
-        <nav class="container mx-auto px-6 py-4">
-            <h1 class="text-3xl font-bold">Mercado de Producción Sostenible</h1>
-            <p class="text-lg text-blue-100">Productos frescos de nuestros sistemas de producción.</p>
-        </nav>
-    </header>
+{# Esta página puede cambiar el título de la pestaña del navegador #}
+{% block title %}Inicio - Mercado Sostenible{% endblock %}
 
-    <!-- Contenido Principal - Sección de Productos -->
-    <main class="container mx-auto px-6 py-12">
+{# Este es el contenido que se insertará en el bloque de 'base.html' #}
+{% block content %}
+    <div class="container mx-auto px-6 py-12">
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Nuestros Productos</h2>
 
         <!-- Grid de Productos -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
             <!-- Producto 1: Acuícolas -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+            <div id="productos-acuicolas" class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
                 <img src="https://placehold.co/400x300/3498db/ffffff?text=Acu%C3%ADcolas" alt="Productos Acuícolas" class="w-full h-56 object-cover">
                 <div class="p-6">
                     <h3 class="text-2xl font-semibold text-gray-800 mb-2">Productos Acuícolas</h3>
@@ -56,7 +26,7 @@
             </div>
 
             <!-- Producto 2: Pesqueros -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+            <div id="productos-pesqueros" class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
                 <img src="https://placehold.co/400x300/1abc9c/ffffff?text=Pesqueros" alt="Productos Pesqueros" class="w-full h-56 object-cover">
                 <div class="p-6">
                     <h3 class="text-2xl font-semibold text-gray-800 mb-2">Productos Pesqueros</h3>
@@ -69,7 +39,7 @@
             </div>
 
             <!-- Producto 3: Ganaderos -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+            <div id="productos-ganaderos" class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
                 <img src="https://placehold.co/400x300/e74c3c/ffffff?text=Ganaderos" alt="Productos Ganaderos" class="w-full h-56 object-cover">
                 <div class="p-6">
                     <h3 class="text-2xl font-semibold text-gray-800 mb-2">Productos Ganaderos</h3>
@@ -82,7 +52,7 @@
             </div>
 
             <!-- Producto 4: Vegetales -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+            <div id="productos-vegetales" class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
                 <img src="https://placehold.co/400x300/2ecc71/ffffff?text=Vegetales" alt="Productos Vegetales" class="w-full h-56 object-cover">
                 <div class="p-6">
                     <h3 class="text-2xl font-semibold text-gray-800 mb-2">Productos Vegetales</h3>
@@ -95,145 +65,5 @@
             </div>
 
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 mt-12 py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 Mercado de Producción Sostenible. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- Botón Flotante del Chatbot -->
-    <button id="chat-toggle-button" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-transform duration-300 hover:scale-110 focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-    </button>
-
-    <!-- Ventana del Chatbot -->
-    <div id="chat-window" class="fixed bottom-24 right-6 w-80 md:w-96 bg-white rounded-lg shadow-xl hidden transition-all duration-300">
-        <!-- Encabezado del Chat -->
-        <div class="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
-            <h3 class="font-bold text-lg">Asistente Virtual</h3>
-            <button id="chat-close-button" class="text-white hover:text-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-
-        <!-- Cuerpo de Mensajes -->
-        <div id="chat-messages" class="h-80 p-4 overflow-y-auto">
-            <!-- Mensaje de bienvenida del bot -->
-            <div class="mb-4">
-                <div class="bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs">
-                    ¡Hola! 👋 ¿Cómo puedo ayudarte hoy con nuestros productos?
-                </div>
-            </div>
-        </div>
-
-        <!-- Entrada de Texto del Chat -->
-        <div class="p-4 border-t border-gray-200 flex">
-            <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <button id="chat-send-button" class="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-600">
-                Enviar
-            </button>
-        </div>
     </div>
-
-    <!-- Script de JavaScript para el Chatbot -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const chatToggleButton = document.getElementById('chat-toggle-button');
-            const chatWindow = document.getElementById('chat-window');
-            const chatCloseButton = document.getElementById('chat-close-button');
-            const chatSendButton = document.getElementById('chat-send-button');
-            const chatInput = document.getElementById('chat-input');
-            const chatMessages = document.getElementById('chat-messages');
-
-            // Mostrar/Ocultar ventana de chat
-            chatToggleButton.addEventListener('click', () => {
-                chatWindow.classList.toggle('hidden');
-                chatToggleButton.classList.toggle('hidden');
-            });
-
-            // Cerrar ventana de chat
-            chatCloseButton.addEventListener('click', () => {
-                chatWindow.classList.add('hidden');
-                chatToggleButton.classList.remove('hidden');
-            });
-
-            // Enviar mensaje
-            const sendMessage = () => {
-                const messageText = chatInput.value.trim();
-                if (messageText === '') return;
-
-                // Añadir mensaje del usuario al chat
-                const userMessage = document.createElement('div');
-                userMessage.classList.add('mb-4', 'flex', 'justify-end');
-                userMessage.innerHTML = `
-                    <div class="bg-blue-500 text-white p-3 rounded-lg max-w-xs">
-                        ${messageText}
-                    </div>
-                `;
-                chatMessages.appendChild(userMessage);
-
-                // Limpiar input
-                chatInput.value = '';
-
-                // Scroll al final
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                // Simular respuesta del bot
-                setTimeout(getBotResponse, 1000, messageText.toLowerCase());
-            };
-
-            // Evento click para enviar
-            chatSendButton.addEventListener('click', sendMessage);
-
-            // Evento 'Enter' para enviar
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-
-            // Lógica simple del bot
-            const getBotResponse = (userMessage) => {
-                let botReply = "No estoy seguro de cómo responder a eso. ¿Puedes preguntar sobre nuestros productos (acuícolas, pesqueros, ganaderos, vegetales)?";
-
-                if (userMessage.includes('hola') || userMessage.includes('buenos días')) {
-                    botReply = "¡Hola! ¿En qué producto estás interesado hoy?";
-                } else if (userMessage.includes('acuícola') || userMessage.includes('tilapia') || userMessage.includes('camarón')) {
-                    botReply = "Nuestros productos acuícolas, como la tilapia, cuestan $12.50 / kg. Son frescos y criados de forma sostenible.";
-                } else if (userMessage.includes('pesquero') || userMessage.includes('pescado')) {
-                    botReply = "Tenemos una gran selección de pescado fresco a $18.00 / kg. ¡Es capturado localmente!";
-                } else if (userMessage.includes('ganadero') || userMessage.includes('carne') || userMessage.includes('leche')) {
-                    botReply = "Nuestra carne de res de pastoreo está a $9.75 / kg. ¡Calidad garantizada!";
-                } else if (userMessage.includes('vegetal') || userMessage.includes('verdura') || userMessage.includes('fruta')) {
-                    botReply = "Las verduras de temporada están a $3.50 / kg. ¡Son frescas de la granja!";
-                } else if (userMessage.includes('precio') || userMessage.includes('cuánto cuesta')) {
-                    botReply = "Nuestros precios varían: Acuícolas ($12.50/kg), Pesqueros ($18.00/kg), Ganaderos ($9.75/kg) y Vegetales ($3.50/kg).";
-                } else if (userMessage.includes('gracias') || userMessage.includes('adiós')) {
-                    botReply = "¡De nada! Estamos aquí para servirte. ¡Que tengas un buen día!";
-                }
-
-                // Añadir respuesta del bot al chat
-                const botMessage = document.createElement('div');
-                botMessage.classList.add('mb-4');
-                botMessage.innerHTML = `
-                    <div class="bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs">
-                        ${botReply}
-                    </div>
-                `;
-                chatMessages.appendChild(botMessage);
-
-                // Scroll al final
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            };
-        });
-    </script>
-
-</body>
-</html>
+{% endblock %}
