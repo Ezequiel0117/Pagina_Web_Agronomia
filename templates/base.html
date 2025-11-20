@@ -223,7 +223,7 @@
                 addBotMessage("¡Hola! 👋 Bienvenido a Mercado Sostenible. ¿En qué puedo ayudarte hoy?");
                 showQuickReplies([
                     "🛒 Cómo comprar", 
-                    "📍 Ubicación", 
+                    "🚚 Envíos", 
                     "📞 Hablar con Asesor",
                     "💰 Ver precios"
                 ]);
@@ -287,7 +287,6 @@
         const addBotMessage = (text) => {
             const div = document.createElement("div");
             div.className = "flex justify-start message-enter";
-            // Nota: innerHTML permite poner enlaces <a>
             div.innerHTML = `<div class="bg-white border border-gray-200 text-gray-800 px-4 py-2 rounded-2xl rounded-tl-none max-w-[85%] text-sm shadow-sm leading-relaxed">${text}</div>`;
             chatMessages.appendChild(div);
             scrollToBottom();
@@ -330,11 +329,19 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         };
 
-        // 6. CEREBRO DEL CHATBOT MEJORADO
+        // 6. CEREBRO DEL CHATBOT
         const getBotResponse = (input) => {
             const text = input.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-            // --- CONTACTO / ASESOR (CON ENLACES CLICABLES) ---
+            // --- ENVÍOS (NUEVO) ---
+            if (text.includes("envio") || text.includes("domicilio") || text.includes("entregas") || text.includes("llevan")) {
+                 return {
+                    text: "🚚 **Envíos y Entregas:**<br><br>Realizamos entregas a domicilio dentro del perímetro urbano de **Milagro**. <br><br>Para otras zonas cercanas, por favor contáctanos para coordinar.",
+                    suggestions: ["📞 Hablar con Asesor", "📍 Ver Ubicación"]
+                };
+            }
+
+            // --- CONTACTO / ASESOR ---
             if (text.includes("contacto") || text.includes("asesor") || text.includes("telefono") || text.includes("correo") || text.includes("llamar")) {
                 return {
                     text: `👤 **Atención al Cliente:**<br><br>
@@ -342,7 +349,7 @@
                            📧 <a href="mailto:info@mercadosostenible.com?subject=Consulta%20desde%20la%20Web" class="text-forest-green font-bold underline hover:text-leaf-green">Enviar Correo</a><br>
                            📱 <a href="tel:+593123456789" class="text-forest-green font-bold underline hover:text-leaf-green">+593 123 456 789</a><br><br>
                            Estamos disponibles de 8:00 AM a 5:00 PM.`,
-                    suggestions: ["📍 Ubicación", "💰 Ver precios"]
+                    suggestions: ["📍 Ubicación", "🚚 Envíos"]
                 };
             }
 
@@ -380,7 +387,7 @@
             }
 
             if (text.includes("hola") || text.includes("buenas")) {
-                return { text: "¡Hola! 😊 ¿En qué te puedo ayudar hoy?", suggestions: ["💰 Ver precios", "📞 Contacto"] };
+                return { text: "¡Hola! 😊 ¿En qué te puedo ayudar hoy?", suggestions: ["💰 Ver precios", "🚚 Envíos"] };
             }
 
             if (text.includes("gracias") || text.includes("chao")) {
