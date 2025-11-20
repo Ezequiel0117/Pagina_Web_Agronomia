@@ -1,0 +1,94 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block title %}Crear Cuenta{%endblock %} 
+
+{% block content %}
+
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-blue via-forest-green to-leaf-green py-20">
+  <div class="bg-white/90 backdrop-blur-xl p-10 rounded-2xl shadow-2xl w-full max-w-md">
+    <h2 class="text-3xl font-extrabold text-center text-forest-green mb-6">
+      Crear Cuenta
+    </h2>
+
+    {% if messages %}
+    <div class="mb-4">
+      {% for message in messages %}
+      <p class="p-3 bg-red-100 text-red-700 rounded-lg text-center">
+        {{ message }}
+      </p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST" class="space-y-6">
+      {% csrf_token %}
+
+      <div>
+        <label class="block text-gray-700 font-semibold">Usuario</label>
+        <input
+          type="text"
+          name="usuario"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-green focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-semibold"
+          >Correo electrónico</label
+        >
+        <input
+          type="email"
+          name="email"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-green focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-semibold">Contraseña</label>
+        <input
+          type="password"
+          name="clave1"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-green focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-semibold"
+          >Repetir contraseña</label
+        >
+        <input
+          type="password"
+          name="clave2"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-green focus:outline-none"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-gradient-to-r from-forest-green to-leaf-green text-white font-bold py-3 rounded-lg text-lg hover:scale-105 transition-all shadow-md"
+      >
+        Crear cuenta
+      </button>
+    </form>
+
+    <!-- Enlace a iniciar sesión -->
+    <div class="text-center mt-4">
+      <p class="text-gray-600">
+        ¿Ya tienes una cuenta?
+        <a
+          href="{% url 'login' %}"
+          class="text-forest-green font-semibold hover:underline"
+        >
+          Inicia sesión
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
