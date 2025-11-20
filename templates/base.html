@@ -111,7 +111,7 @@
             id="user-dropdown"
             class="hidden absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 border border-gray-200"
           >
-            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+            <a href="{% url 'perfil' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
               Perfil del usuario
             </a>
 
@@ -367,7 +367,6 @@
 
     <!-- Script del Chatbot Mejorado -->
     <script>
-<<<<<<< HEAD
       document.addEventListener("DOMContentLoaded", () => {
         // Toggle del menú móvil
         const mobileMenuButton = document.getElementById("mobile-menu-button");
@@ -391,199 +390,6 @@
           chatWindow.classList.toggle("hidden");
           chatToggleButton.classList.toggle("hidden");
         });
-=======
-      document.addEventListener('DOMContentLoaded', () => {
-          // Toggle del menú móvil
-          const mobileMenuButton = document.getElementById('mobile-menu-button');
-          const mobileMenu = document.getElementById('mobile-menu');
-
-          if (mobileMenuButton) {
-              mobileMenuButton.addEventListener('click', () => {
-                  mobileMenu.classList.toggle('hidden');
-              });
-          }
-
-          // Chatbot
-          const chatToggleButton = document.getElementById('chat-toggle-button');
-          const chatWindow = document.getElementById('chat-window');
-          const chatCloseButton = document.getElementById('chat-close-button');
-          const chatSendButton = document.getElementById('chat-send-button');
-          const chatInput = document.getElementById('chat-input');
-          const chatMessages = document.getElementById('chat-messages');
-
-          let currentContext = 'main_menu'; // Para saber en qué parte del menú estamos
-
-          chatToggleButton.addEventListener('click', () => {
-              chatWindow.classList.toggle('hidden');
-              chatToggleButton.classList.toggle('hidden');
-              if (!chatWindow.classList.contains('hidden')) {
-                  // Si el chat se abre, asegúrate de que el menú principal se muestre
-                  displayMainMenu();
-              }
-          });
-
-          chatCloseButton.addEventListener('click', () => {
-              chatWindow.classList.add('hidden');
-              chatToggleButton.classList.remove('hidden');
-          });
-
-          const addMessage = (text, isUser = false, emoji = '') => {
-              const messageDiv = document.createElement('div');
-              messageDiv.classList.add('mb-4', 'chat-message');
-
-              if (isUser) {
-                  messageDiv.classList.add('flex', 'justify-end', 'user-message');
-                  messageDiv.innerHTML = `<div class="bg-gradient-to-r from-gray-600 to-gray-700 text-white p-3 rounded-2xl rounded-tr-none max-w-xs shadow-md">${text}</div>`;
-              } else {
-                  messageDiv.innerHTML = `<div class="bg-gradient-to-r from-sky-500 to-teal-500 text-white p-3 rounded-2xl rounded-tl-none max-w-xs shadow-md">${emoji} ${text}</div>`;
-              }
-              chatMessages.appendChild(messageDiv);
-              chatMessages.scrollTop = chatMessages.scrollHeight;
-          };
-
-          const sendMessage = () => {
-              const messageText = chatInput.value.trim();
-              if (messageText === '') return;
-
-              addMessage(messageText, true); // Mostrar mensaje del usuario
-              chatInput.value = '';
-
-              // Indicador de escritura
-              const typingDiv = document.createElement('div');
-              typingDiv.classList.add('mb-4', 'chat-message');
-              typingDiv.id = 'typing-indicator';
-              typingDiv.innerHTML = `<div class="bg-gray-200 p-3 rounded-2xl rounded-tl-none max-w-xs"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
-              chatMessages.appendChild(typingDiv);
-              chatMessages.scrollTop = chatMessages.scrollHeight;
-
-              setTimeout(() => {
-                  document.getElementById('typing-indicator').remove();
-                  handleBotResponse(messageText);
-              }, 1000);
-          };
-
-          chatSendButton.addEventListener('click', sendMessage);
-          chatInput.addEventListener('keypress', (e) => {
-              if (e.key === 'Enter') sendMessage();
-          });
-
-          const displayMainMenu = () => {
-              currentContext = 'main_menu';
-              // Mostrar el menú como un único mensaje con saltos de línea HTML
-              const welcomeMessage = `
-                  ¡Hola! 👋 Soy tu asistente. ¿Cómo puedo ayudarte hoy?<br>
-                  Por favor, elige una opción:<br><br>
-                  1. Información sobre Productos Acuícolas 🐟<br>
-                  2. Información sobre Productos Pesqueros 🦐<br>
-                  3. Información sobre Productos Ganaderos 🥩<br>
-                  4. Información sobre Productos Vegetales 🥬<br>
-                  5. Preguntas Frecuentes (FAQ) ❓<br>
-                  6. Contacto y Horarios 📞<br>
-                  7. Volver al menú principal 🏠
-              `;
-              addMessage(welcomeMessage);
-          };
-
-          const displayFAQMenu = () => {
-              currentContext = 'faq_menu';
-              const faqMessage = `
-                  Preguntas Frecuentes. Elige una opción:<br>
-                  1. ¿Cuáles son los precios promedio? 💰<br>
-                  2. ¿Ofrecen envío a domicilio? 🚚<br>
-                  3. ¿Son productos sostenibles/ecológicos? 🌱<br>
-                  4. ¿Dónde están ubicados? 📍<br>
-                  5. Volver al menú principal 🏠
-              `;
-              addMessage(faqMessage);
-          };
-
-          const handleBotResponse = (userMessage) => {
-              const choice = parseInt(userMessage.trim());
-
-              let botReply = "Opción no válida. Por favor, elige un número de las opciones disponibles.";
-              let emoji = "🤔";
-
-              if (currentContext === 'main_menu') {
-                  switch (choice) {
-                      case 1:
-                          botReply = "Nuestros productos acuícolas, como la tilapia y camarones, son frescos y criados en sistemas controlados. Precio: $12.50 / kg.";
-                          emoji = "🐟";
-                          break;
-                      case 2:
-                          botReply = "Ofrecemos una selección de pescado y marisco fresco, capturado de forma responsable por pescadores locales. Precio: $18.00 / kg.";
-                          emoji = "🦐";
-                          break;
-                      case 3:
-                          botReply = "Nuestros productos ganaderos incluyen carne de res, pollo, cerdo y lácteos de ganado criado éticamente en pastizales. Precio: $9.75 / kg.";
-                          emoji = "🥩";
-                          break;
-                      case 4:
-                          botReply = "Disponemos de frutas y verduras frescas de temporada, cultivadas localmente sin pesticidas dañinos. Precio: $3.50 / kg.";
-                          emoji = "🥬";
-                          break;
-                      case 5:
-                          displayFAQMenu(); // Cambia al menú de FAQ
-                          return; // No añades la respuesta de botReply aquí, ya la maneja displayFAQMenu
-                      case 6:
-                          botReply = "Puedes contactarnos al +593 123 456 789 o por email en contacto@mercadosostenible.ec. Estamos abiertos de lunes a sábado, de 8:00 AM a 6:00 PM.";
-                          emoji = "📞";
-                          break;
-                      case 7:
-                          displayMainMenu(); // Reinicia el menú principal
-                          return;
-                      default:
-                          botReply = "Opción no válida. Por favor, elige un número del 1 al 7 para el menú principal.";
-                          emoji = "❌";
-                  }
-              } else if (currentContext === 'faq_menu') {
-                  switch (choice) {
-                      case 1:
-                          botReply = "Nuestros precios promedio son: Acuícolas ($12.50/kg), Pesqueros ($18.00/kg), Ganaderos ($9.75/kg) y Vegetales ($3.50/kg).";
-                          emoji = "💰";
-                          break;
-                      case 2:
-                          botReply = "Sí, ofrecemos servicio de envío local gratuito para compras superiores a $50.";
-                          emoji = "🚚";
-                          break;
-                      case 3:
-                          botReply = "Sí, nos enorgullece ofrecer productos sostenibles y ecológicos de productores locales.";
-                          emoji = "🌱";
-                          break;
-                      case 4:
-                          botReply = "Estamos ubicados en Milagro, Guayas, Ecuador. ¡Esperamos tu visita!";
-                          emoji = "📍";
-                          break;
-                      case 5:
-                          displayMainMenu(); // Volver al menú principal
-                          return;
-                      default:
-                          botReply = "Opción no válida. Por favor, elige un número del 1 al 5 para las Preguntas Frecuentes.";
-                          emoji = "❌";
-                  }
-              }
-
-              addMessage(botReply, false, emoji);
-              // Después de una respuesta, siempre regresa al menú principal (o al contexto anterior)
-              if (currentContext !== 'main_menu' && currentContext !== 'faq_menu') { // Si no estamos ya en un menú, lo mostramos
-                  // Si no es un submenú que requiere seguir ahí, mostramos el menú principal después de la respuesta
-                  setTimeout(displayMainMenu, 1500); // Dar tiempo para leer la respuesta
-              } else if (currentContext === 'faq_menu' && choice !== 5) { // Si estamos en FAQ y no pidió volver
-                  setTimeout(displayFAQMenu, 1500);
-              } else if (currentContext === 'main_menu' && choice !== 7) { // Si estamos en Main y no pidió volver
-                  setTimeout(displayMainMenu, 1500);
-              }
-          };
-
-          // Mensaje de bienvenida inicial del bot al cargar o abrir el chat
-          // Asegúrate de que este sea el primer mensaje si el chat está oculto por defecto
-          if (chatWindow.classList.contains('hidden')) {
-              // No hacer nada, se mostrará al abrir
-          } else {
-              displayMainMenu();
-          }
-      });
-    </script>
->>>>>>> fc9425776ddb46d5ddf3c184f3a9d4d059d319dd
 
         chatCloseButton.addEventListener("click", () => {
           chatWindow.classList.add("hidden");
