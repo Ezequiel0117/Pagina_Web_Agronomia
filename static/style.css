@@ -316,6 +316,71 @@ footer {
     }
 }
 
+/* Animación de entrada suave para mensajes */
+.message-enter {
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+/* Animación de "Escribiendo..." */
+.typing-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #9CA3AF;
+    border-radius: 50%;
+    animation: typingDots 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) { 
+    animation-delay: -0.32s; 
+}
+
+.typing-dot:nth-child(2) { 
+    animation-delay: -0.16s; 
+}
+
+@keyframes typingDots {
+    0%, 80%, 100% { 
+        transform: scale(0); 
+    }
+    40% { 
+        transform: scale(1); 
+    }
+}
+
+/* Estilo para los botones de preguntas rápidas (Chips) */
+.quick-reply-btn {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border: 1px solid #2B601E;
+    color: #2B601E;
+    background-color: white;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    margin-top: 4px;
+}
+
+.quick-reply-btn:hover {
+    background-color: #2B601E;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Scrollbar personalizada para el chat */
+#chat-messages::-webkit-scrollbar { 
+    width: 5px; 
+}
+
+#chat-messages::-webkit-scrollbar-track { 
+    background: transparent; 
+}
+
+#chat-messages::-webkit-scrollbar-thumb { 
+    background: #cbd5e1; 
+    border-radius: 3px; 
+}
+
 .login-container {
     background: white;
     padding: 40px;
