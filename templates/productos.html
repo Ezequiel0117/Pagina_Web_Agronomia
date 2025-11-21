@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ titulo }} - Mercado Sostenible{% endblock %}
+
+{% block content %}
+<script src="{% static 'productos.js' %}"></script>
+
+<div class="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 py-10">
+    <div class="container mx-auto px-6">
+        
+        <!-- Header con carrito -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-2">
+                    {{ titulo }}
+                </h1>
+                <div class="h-1 w-32 bg-gradient-to-r from-forest-green to-leaf-green rounded-full"></div>
+            </div>
+            
+            <a href="{% url 'ver_carrito' %}" 
+               class="relative bg-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all border-2 border-forest-green group">
+                <span class="text-3xl">🛒</span>
+                                <span id="carrito-count" class="carrito-count absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    {{ total_carrito }}
+                                </span>
+            </a>
+        </div>
+
+        <!-- Grid de productos -->
+        {% if productos %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {% for producto in productos %}
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                
+                <!-- Imagen del producto -->
+                <div class="relative h-56 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+                    {% if producto.imagen %}
+                        <img class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                             src="{{ producto.imagen.url }}"
+                             alt="{{ producto.nombre }}">
+                    {% else %}
+                        <img class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                             src="{% static 'img/default-product.jpg' %}"
+                             alt="{{ producto.nombre }}"
+                             onerror="this.src='https://via.placeholder.com/400x300?text=Sin+Imagen'">
+                    {% endif %}
+                    
+                    <!-- Badge de categoría -->
+                    <div class="absolute top-3 left-3 bg-forest-green text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                        {{ producto.categoria }}
+                    </div>
+                </div>
+
+                <!-- Información del producto -->
+                <div class="p-5">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 line-clamp-1">
+                        {{ producto.nombre }}
+                    </h3>
+
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-2 h-10">
+                        {{ producto.descripcion }}
+                    </p>
+
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-3xl font-extrabold text-forest-green">
+                                ${{ producto.precio }}
+                            </p>
+                            <p class="text-xs text-gray-500">por kg</p>
+                        </div>
+                        
+                        <div class="text-right">
+                            <p class="text-sm text-gray-600">Stock disponible</p>
+                            <p class="text-lg font-bold text-gray-800">{{ producto.stock }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Botón agregar al carrito -->
+                    <button onclick="agregarAlCarrito({{ producto.id }})"
+                            class="w-full py-3 bg-gradient-to-r from-forest-green to-leaf-green text-white font-bold rounded-xl hover:from-leaf-green hover:to-forest-green transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                        <span class="text-xl">🛒</span>
+                        Agregar al carrito
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="bg-white shadow-xl rounded-2xl p-12 text-center">
+            <div class="text-6xl mb-4">📦</div>
+            <p class="text-2xl text-gray-600 mb-4">No hay productos disponibles</p>
+            <p class="text-gray-500">Vuelve pronto para ver nuevos productos en {{ categoria }}</p>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+<!-- JavaScript movido a static/productos.js
+<script>
+    function agregarCarrito(idProducto) {
+        fetch(`/carrito/agregar/${idProducto}/`, {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Actualizar contador del carrito
+            const contador = document.getElementById("carrito-count");
+            contador.textContent = data.total_items;
+            
+            // Animación de feedback
+            contador.classList.add('animate-bounce');
+            setTimeout(() => {
+                contador.classList.remove('animate-bounce');
+            }, 500);
+            
+            // Mostrar notificación
+            mostrarNotificacion('✅ Producto agregado al carrito');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            mostrarNotificacion('❌ Error al agregar producto', true);
+        });
+    }
+
+    function mostrarNotificacion(mensaje, esError = false) {
+        const notif = document.createElement('div');
+        notif.className = `fixed top-24 right-6 ${esError ? 'bg-red-500' : 'bg-green-500'} text-white px-6 py-3 rounded-lg shadow-xl z-50 animate-[slideIn_0.3s_ease-out]`;
+        notif.textContent = mensaje;
+        document.body.appendChild(notif);
+        
+        setTimeout(() => {
+            notif.style.opacity = '0';
+            notif.style.transform = 'translateX(100%)';
+            notif.style.transition = 'all 0.3s ease-out';
+            setTimeout(() => notif.remove(), 300);
+        }, 2000);
+    }
+</script> -->
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Auth - Mercado Sostenible{% endblock %}</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <script src="{% static 'scripts.js' %}" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "forest-green": "#2B601E",
+                        "earth-taupe": "#A88D66",
+                        "leaf-green": "#91D956",
+                        "sky-blue": "#A1C8E8",
+                        "golden-harvest": "#D1A24E",
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100%;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen font-sans bg-gray-50">
+    {% block content %}{% endblock %}
+
+    <!-- CHATBOT para páginas auth (mismo markup para scripts.js) -->
+    <button id="chat-toggle-button" aria-label="Abrir chat" class="fixed bottom-6 right-6 z-50 bg-forest-green text-white p-4 rounded-full shadow-xl hover:scale-105">
+        💬
+    </button>
+
+    <div id="chat-window" class="hidden fixed bottom-20 right-6 z-50 w-80 md:w-96 h-96 bg-white flex-col overflow-hidden">
+        <div class="flex items-center justify-between px-4 py-3 border-b">
+            <div class="text-sm font-semibold text-forest-green">Asistente — Mercado Sostenible</div>
+            <button id="chat-close-button" class="text-gray-500 hover:text-gray-800">✕</button>
+        </div>
+        <div id="chat-messages" class="flex-1 p-3 overflow-y-auto bg-gray-50"></div>
+        <div class="px-3 py-2 border-t bg-white">
+            <div class="flex gap-2">
+                <input id="chat-input" type="text" class="flex-1 px-3 py-2 border rounded-lg" placeholder="Escribe tu mensaje..." />
+                <button id="chat-send-button" class="bg-forest-green text-white px-4 py-2 rounded-lg" disabled>Enviar</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,377 +1,350 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}Mercado Sostenible{% endblock %}</title>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Mercado Sostenible{% endblock %}</title>
 
-        <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <script src="{% static 'scripts.js' %}" defer></script>
 
-    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              "forest-green": "#2B601E",
-              "earth-taupe": "#A88D66",
-              "leaf-green": "#91D956",
-              "sky-blue": "#A1C8E8",
-              "golden-harvest": "#D1A24E",
-            },
-          },
-        },
-      };
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "forest-green": "#2B601E",
+                        "earth-taupe": "#A88D66",
+                        "leaf-green": "#91D956",
+                        "sky-blue": "#A1C8E8",
+                        "golden-harvest": "#D1A24E",
+                    },
+                },
+            },
+        };
     </script>
-  </head>
-  <body class="flex flex-col min-h-screen font-sans">    <header class="navbar-blur bg-forest-green text-white shadow-2xl sticky top-0 z-50 bg-opacity-95 backdrop-blur-md">
-      <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <div class="logo-animate">
-          <a href="/" class="text-2xl md:text-3xl font-bold flex items-center gap-2 hover:text-leaf-green transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-            Mercado Sostenible
-          </a>
-        </div>
-        <div class="hidden md:flex space-x-6 lg:space-x-8">
-          <a href="#productos-acuicolas" class="text-base lg:text-lg font-medium hover:text-golden-harvest transition-all">🐟 Acuícolas</a>
-          <a href="#productos-pesqueros" class="text-base lg:text-lg font-medium hover:text-golden-harvest transition-all">🦐 Pesqueros</a>
-          <a href="#productos-ganaderos" class="text-base lg:text-lg font-medium hover:text-golden-harvest transition-all">🥩 Ganaderos</a>
-          <a href="#productos-vegetales" class="text-base lg:text-lg font-medium hover:text-golden-harvest transition-all">🥬 Vegetales</a>
-        </div>
-        <div class="flex items-center gap-4">
-          {% if user.is_authenticated %}
-          <div class="relative">
-            <button id="user-menu-button" class="flex items-center gap-2 bg-white text-forest-green font-semibold px-4 py-2 rounded-full shadow hover:scale-105 transition">
-              <span class="hidden sm:inline">{{ user.username }}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-            </button>
-            <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white shadow-xl rounded-lg py-2 border border-gray-100 animate-[fadeIn_0.2s_ease-out]">
-              <a href="{% url 'perfil' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50">Perfil</a>
-              <a href="{% url 'logout' %}" class="block px-4 py-2 text-red-600 hover:bg-red-50">Cerrar sesión</a>
-            </div>
-          </div>
-          {% else %}
-          <a href="{% url 'login' %}" class="hidden sm:inline-block bg-white text-forest-green font-bold px-6 py-2 rounded-full shadow hover:bg-gray-100 transition">Ingresar</a>
-          {% endif %}
-          <div class="md:hidden">
-            <button id="mobile-menu-button" class="text-white p-2">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-          </div>
-        </div>
-      </nav>
-      <div id="mobile-menu" class="hidden md:hidden bg-forest-green border-t border-white/10 px-6 py-4 space-y-4">
-          <a href="#productos-acuicolas" class="block text-white">🐟 Acuícolas</a>
-          <a href="#productos-pesqueros" class="block text-white">🦐 Pesqueros</a>
-          <a href="#productos-ganaderos" class="block text-white">🥩 Ganaderos</a>
-          <a href="#productos-vegetales" class="block text-white">🥬 Vegetales</a>
-      </div>
-    </header>
 
-    <main class="flex-grow bg-gray-50">
-        {% block content %} {% endblock %}
-    </main>
+    <style>
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100%;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
 
-    <footer class="bg-gray-900 text-gray-300 py-12 mt-auto">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4">Mercado Sostenible</h3>
-                    <p class="text-gray-400">Conectando productores locales con consumidores conscientes. Productos frescos y sostenibles.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4">Enlaces Rápidos</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#productos-acuicolas" class="text-gray-400 hover:text-white transition-colors">Productos Acuícolas</a></li>
-                        <li><a href="#productos-pesqueros" class="text-gray-400 hover:text-white transition-colors">Productos Pesqueros</a></li>
-                        <li><a href="#productos-ganaderos" class="text-gray-400 hover:text-white transition-colors">Productos Ganaderos</a></li>
-                        <li><a href="#productos-vegetales" class="text-gray-400 hover:text-white transition-colors">Productos Vegetales</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4">Contacto</h3>
-                    <p class="text-gray-400 mb-2">📧 info@mercadosostenible.com</p>
-                    <p class="text-gray-400 mb-2">📱 +593 123 456 789</p>
-                    <p class="text-gray-400">📍 Milagro, Guayas, Ecuador</p>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 pt-6 text-center">
-                <p>&copy; 2025 Mercado de Producción Sostenible. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
+<body class="flex flex-col min-h-screen font-sans bg-gray-50">
 
-    <button
-      id="chat-toggle-button"
-      class="fixed bottom-6 right-6 bg-gradient-to-br from-forest-green to-leaf-green text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 focus:outline-none z-40"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-      </svg>
-    </button>
+<!-- =====================================================
+                     NAVBAR
+===================================================== -->
+<header
+    class="navbar-blur bg-gradient-to-r from-forest-green via-forest-green to-[#1f4d16] text-white shadow-2xl sticky top-0 z-50 backdrop-blur-md border-b-2 border-leaf-green/30">
 
-    <div
-      id="chat-window"
-      class="fixed bottom-24 right-6 w-[90%] md:w-96 h-[500px] max-h-[80vh] bg-white rounded-2xl shadow-2xl hidden flex-col z-50 border border-gray-200 overflow-hidden transition-all duration-300 origin-bottom-right"
-    >
-      <div class="bg-gradient-to-r from-forest-green to-leaf-green text-white p-4 flex justify-between items-center shadow-md">
-        <div class="flex items-center gap-3">
-            <div class="relative">
-                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                   <span class="text-xl">🤖</span>
-                </div>
-                <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-forest-green rounded-full animate-pulse"></div>
-            </div>
-            <div>
-                <h3 class="font-bold text-base">Asistente Virtual</h3>
-                <p class="text-xs text-green-100">Responde al instante</p>
-            </div>
-        </div>
-        <button id="chat-close-button" class="hover:bg-white/20 rounded-full p-1 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-        </button>
-      </div>
+    <!-- Barra superior -->
+    <div class="bg-forest-green/40 backdrop-blur-sm border-b border-white/10">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex justify-between items-center text-xs md:text-sm">
+                <div class="flex items-center gap-4">
+                    <span class="flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                        </svg>
+                        info@mercadosostenible.com
+                    </span>
 
-      <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-gray-50 space-y-4">
-        </div>
+                    <span class="hidden md:flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                        </svg>
+                        +593 123 456 789
+                    </span>
+                </div>
 
-      <div class="p-3 bg-white border-t border-gray-100">
-        <div class="flex gap-2 items-center bg-gray-100 rounded-full px-4 py-2 focus-within:ring-2 focus-within:ring-leaf-green/30 transition-all">
-            <input
-                type="text"
-                id="chat-input"
-                placeholder="Escribe aquí..."
-                class="flex-1 bg-transparent text-sm outline-none text-gray-700"
-                autocomplete="off"
-            />
-            <button id="chat-send-button" class="text-forest-green hover:text-leaf-green transition-colors disabled:opacity-50" disabled>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
-            </button>
-        </div>
-      </div>
-    </div>
+                <div class="text-xs opacity-80">🌱 Productos frescos y sostenibles</div>
+            </div>
+        </div>
+    </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // --- Lógica Navbar (Móvil y Usuario) ---
-        const mobileMenuBtn = document.getElementById("mobile-menu-button");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const userMenuBtn = document.getElementById("user-menu-button");
-        const userDropdown = document.getElementById("user-dropdown");
+    <!-- NAV -->
+    <nav class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
 
-        if (mobileMenuBtn) mobileMenuBtn.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
-        
-        if (userMenuBtn && userDropdown) {
-            userMenuBtn.addEventListener("click", (e) => { e.stopPropagation(); userDropdown.classList.toggle("hidden"); });
-            document.addEventListener("click", (e) => { if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) userDropdown.classList.add("hidden"); });
-        }
+            <!-- Logo -->
+            <a href="/" class="flex items-center gap-3 group">
+                <div
+                    class="bg-white p-2 rounded-xl shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-forest-green" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <div
+                        class="text-xl md:text-2xl font-extrabold tracking-tight group-hover:text-golden-harvest transition-colors">
+                        Mercado Sostenible
+                    </div>
+                    <div class="text-xs text-leaf-green font-medium hidden sm:block">Del campo a tu mesa</div>
+                </div>
+            </a>
 
-        // --- LÓGICA CHATBOT ---
-        const chatToggleBtn = document.getElementById("chat-toggle-button");
-        const chatWindow = document.getElementById("chat-window");
-        const chatCloseBtn = document.getElementById("chat-close-button");
-        const chatSendBtn = document.getElementById("chat-send-button");
-        const chatInput = document.getElementById("chat-input");
-        const chatMessages = document.getElementById("chat-messages");
-        
-        let isBotTyping = false;
-        let hasWelcomed = false;
+            <!-- Botón Inicio (visible en md+) -->
+            <a href="/" class="hidden md:inline-flex items-center ml-4 px-4 py-2.5 rounded-xl hover:bg-white/10 transition border border-transparent hover:border-white/20">
+                <span class="font-medium text-white">Inicio</span>
+            </a>
 
-        // 1. Inicialización
-        const initChat = () => {
-            if (!hasWelcomed) {
-                addBotMessage("¡Hola! 👋 Bienvenido a Mercado Sostenible. ¿En qué puedo ayudarte hoy?");
-                showQuickReplies([
-                    "🛒 Cómo comprar", 
-                    "🚚 Envíos", 
-                    "📞 Hablar con Asesor",
-                    "💰 Ver precios"
-                ]);
-                hasWelcomed = true;
-            }
-        };
+            <!-- MENÚ CATEGORÍAS -->
+            <div class="hidden lg:flex items-center gap-2">
 
-        // 2. Abrir/Cerrar
-        chatToggleBtn.addEventListener("click", () => {
-            chatWindow.classList.remove("hidden");
-            chatWindow.classList.add("flex");
-            chatToggleBtn.classList.add("hidden");
-            initChat();
-            setTimeout(() => chatInput.focus(), 100);
-        });
+                <a href="{% url 'productos_categoria' 'acuicolas' %}"
+                   class="group flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-white/10 transition border border-transparent hover:border-white/20">
+                    <span class="text-2xl group-hover:scale-110 transition">🐟</span>
+                    <span class="font-medium group-hover:text-golden-harvest">Acuícolas</span>
+                </a>
 
-        chatCloseBtn.addEventListener("click", () => {
-            chatWindow.classList.add("hidden");
-            chatWindow.classList.remove("flex");
-            chatToggleBtn.classList.remove("hidden");
-        });
+                <a href="{% url 'productos_categoria' 'pesqueros' %}"
+                   class="group flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-white/10 transition border border-transparent hover:border-white/20">
+                    <span class="text-2xl group-hover:scale-110 transition">🦐</span>
+                    <span class="font-medium group-hover:text-golden-harvest">Pesqueros</span>
+                </a>
 
-        // 3. Manejo del Input
-        chatInput.addEventListener("input", () => {
-            chatSendBtn.disabled = chatInput.value.trim() === "";
-        });
+                <a href="{% url 'productos_categoria' 'ganaderos' %}"
+                   class="group flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-white/10 transition border border-transparent hover:border-white/20">
+                    <span class="text-2xl group-hover:scale-110 transition">🥩</span>
+                    <span class="font-medium group-hover:text-golden-harvest">Ganaderos</span>
+                </a>
 
-        // 4. Sistema de Mensajería
-        const handleUserMessage = (text) => {
-            if (!text || isBotTyping) return;
+                <a href="{% url 'productos_categoria' 'vegetales' %}"
+                   class="group flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-white/10 transition border border-transparent hover:border-white/20">
+                    <span class="text-2xl group-hover:scale-110 transition">🥬</span>
+                    <span class="font-medium group-hover:text-golden-harvest">Vegetales</span>
+                </a>
+            </div>
 
-            addUserMessage(text);
-            chatInput.value = "";
-            chatSendBtn.disabled = true;
-            removeQuickReplies();
+            <!-- ACCIONES DERECHA -->
+            <div class="flex items-center gap-3">
 
-            isBotTyping = true;
-            showTypingIndicator();
+                <!-- Carrito eliminado del navbar para usar el carrito localizado en las plantillas -->
 
-            setTimeout(() => {
-                removeTypingIndicator();
-                const response = getBotResponse(text);
-                addBotMessage(response.text);
-                if (response.suggestions) showQuickReplies(response.suggestions);
-                isBotTyping = false;
-            }, 1000); 
-        };
+                {% if user.is_authenticated %}
+                <!-- MENÚ USER -->
+                <div class="relative">
+                    <button id="user-menu-button"
+                            class="flex items-center gap-2 bg-white text-forest-green font-semibold px-5 py-2.5 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition border-2 border-white/50">
 
-        chatSendBtn.addEventListener("click", () => handleUserMessage(chatInput.value.trim()));
-        chatInput.addEventListener("keypress", (e) => { if (e.key === "Enter") handleUserMessage(chatInput.value.trim()); });
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                  clip-rule="evenodd"/>
+                        </svg>
 
-        // 5. Funciones de UI
-        const addUserMessage = (text) => {
-            const div = document.createElement("div");
-            div.className = "flex justify-end message-enter";
-            div.innerHTML = `<div class="bg-forest-green text-white px-4 py-2 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-sm">${text}</div>`;
-            chatMessages.appendChild(div);
-            scrollToBottom();
-        };
+                        <span class="hidden sm:inline">{{ user.username }}</span>
 
-        const addBotMessage = (text) => {
-            const div = document.createElement("div");
-            div.className = "flex justify-start message-enter";
-            div.innerHTML = `<div class="bg-white border border-gray-200 text-gray-800 px-4 py-2 rounded-2xl rounded-tl-none max-w-[85%] text-sm shadow-sm leading-relaxed">${text}</div>`;
-            chatMessages.appendChild(div);
-            scrollToBottom();
-        };
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
 
-        const showQuickReplies = (options) => {
-            const container = document.createElement("div");
-            container.className = "flex flex-wrap gap-2 justify-start message-enter pl-1 quick-replies-container";
-            options.forEach(opt => {
-                const btn = document.createElement("button");
-                btn.className = "quick-reply-btn";
-                btn.textContent = opt;
-                btn.onclick = () => handleUserMessage(opt);
-                container.appendChild(btn);
-            });
-            chatMessages.appendChild(container);
-            scrollToBottom();
-        };
+                    <!-- Dropdown -->
+                    <div id="user-dropdown"
+                         class="hidden absolute right-0 mt-2 w-56 bg-white shadow-2xl rounded-xl py-2 border border-gray-200">
 
-        const removeQuickReplies = () => {
-            const oldReplies = document.querySelectorAll('.quick-replies-container');
-            oldReplies.forEach(el => el.remove()); 
-        };
+                        <div class="px-4 py-3 border-b border-gray-100">
+                            <p class="text-sm font-semibold text-gray-700">{{ user.username }}</p>
+                            <p class="text-xs text-gray-500 truncate">{{ user.email }}</p>
+                        </div>
 
-        const showTypingIndicator = () => {
-            const div = document.createElement("div");
-            div.id = "typing-indicator";
-            div.className = "flex justify-start message-enter";
-            div.innerHTML = `<div class="bg-gray-100 px-4 py-3 rounded-2xl rounded-tl-none"><div class="flex gap-1"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
-            chatMessages.appendChild(div);
-            scrollToBottom();
-        };
+                        <a href="{% url 'perfil' %}"
+                           class="flex items-center gap-2 px-4 py-2.5 text-gray-700 hover:bg-forest-green hover:text-white">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                            Mi Perfil
+                        </a>
 
-        const removeTypingIndicator = () => {
-            const indicator = document.getElementById("typing-indicator");
-            if (indicator) indicator.remove();
-        };
+                        <a href="{% url 'ver_carrito' %}"
+                           class="flex items-center gap-2 px-4 py-2.5 text-gray-700 hover:bg-forest-green hover:text-white">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/>
+                            </svg>
+                            Mi Carrito
+                        </a>
 
-        const scrollToBottom = () => {
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        };
+                        <div class="border-t border-gray-100 mt-2">
+                            <a href="{% url 'logout' %}"
+                               class="flex items-center gap-2 px-4 py-2.5 text-red-600 hover:bg-red-50">
 
-        // 6. CEREBRO DEL CHATBOT
-        const getBotResponse = (input) => {
-            const text = input.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
+                                          clip-rule="evenodd"/>
+                                </svg>
 
-            // --- ENVÍOS (NUEVO) ---
-            if (text.includes("envio") || text.includes("domicilio") || text.includes("entregas") || text.includes("llevan")) {
-                 return {
-                    text: "🚚 **Envíos y Entregas:**<br><br>Realizamos entregas a domicilio dentro del perímetro urbano de **Milagro**. <br><br>Para otras zonas cercanas, por favor contáctanos para coordinar.",
-                    suggestions: ["📞 Hablar con Asesor", "📍 Ver Ubicación"]
-                };
-            }
+                                Cerrar Sesión
+                            </a>
+                        </div>
 
-            // --- CONTACTO / ASESOR ---
-            if (text.includes("contacto") || text.includes("asesor") || text.includes("telefono") || text.includes("correo") || text.includes("llamar")) {
-                return {
-                    text: `👤 **Atención al Cliente:**<br><br>
-                           Haz clic abajo para contactarnos directamente:<br><br>
-                           📧 <a href="mailto:info@mercadosostenible.com?subject=Consulta%20desde%20la%20Web" class="text-forest-green font-bold underline hover:text-leaf-green">Enviar Correo</a><br>
-                           📱 <a href="tel:+593123456789" class="text-forest-green font-bold underline hover:text-leaf-green">+593 123 456 789</a><br><br>
-                           Estamos disponibles de 8:00 AM a 5:00 PM.`,
-                    suggestions: ["📍 Ubicación", "🚚 Envíos"]
-                };
-            }
+                    </div>
+                </div>
+                {% else %}
+                <a href="{% url 'login' %}"
+                   class="bg-white text-forest-green font-bold px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 border-2 border-white/50">
+                    Iniciar Sesión
+                </a>
+                {% endif %}
 
-            // --- CÓMO COMPRAR ---
-            if (text.includes("comprar") || text.includes("pedido") || text.includes("adquirir")) {
-                return {
-                    text: "🛒 **Pasos para comprar:**<br>1. Elige tus productos (Acuícolas, Pesca, Carne o Vegetales).<br>2. Escríbenos al correo o WhatsApp para confirmar stock.<br>3. Coordinamos el pago y envío.<br><br>¡Sencillo y rápido!",
-                    suggestions: ["📞 Hablar con Asesor", "🐟 Ver Productos"]
-                };
-            }
+                <!-- Botón Menú móvil -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button"
+                            class="text-white p-2 hover:bg-white/10 rounded-lg transition">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
 
-            // --- UBICACIÓN ---
-            if (text.includes("ubicacion") || text.includes("donde") || text.includes("direccion")) {
-                return {
-                    text: "📍 **Ubicación:**<br>Operamos en Milagro, Guayas. Conectamos a los productores de la zona directamente contigo.",
-                    suggestions: ["🚚 Envíos", "📞 Contacto"]
-                };
-            }
+            </div>
+        </div>
+    </nav>
 
-            // --- PRECIOS ---
-            if (text.includes("precio") || text.includes("costo") || text.includes("vale")) {
-                return {
-                    text: "💰 **Precios Referenciales:**<br>🐟 Tilapia: $12.50/kg<br>🦐 Camarón: $14.00/kg<br>🥩 Res: $9.75/kg<br>🥬 Vegetales: Desde $3.50<br><br>¿Te interesa alguno en especial?",
-                    suggestions: ["🐟 Tilapia", "🥩 Carne", "📞 Cotizar con Asesor"]
-                };
-            }
+    <!-- MENÚ MÓVIL -->
+    <div id="mobile-menu"
+         class="hidden lg:hidden bg-gradient-to-b from-forest-green to-[#1f4d16] border-t border-white/10">
 
-            // --- PRODUCTOS ---
-            if (text.includes("acuicola") || text.includes("tilapia") || text.includes("camaron")) {
-                return { text: "🐟 Frescura garantizada. Nuestra Tilapia y Camarón son de producción local controlada.", suggestions: ["💰 Ver precio", "🛒 Cómo comprar"] };
-            }
-            
-            if (text.includes("vegetal") || text.includes("verdura")) {
-                return { text: "🥬 Vegetales 100% frescos, sin químicos agresivos. Del campo a tu mesa.", suggestions: ["💰 Ver precio", "🛒 Cómo comprar"] };
-            }
+        <div class="container mx-auto px-6 py-4 space-y-2">
 
-            if (text.includes("hola") || text.includes("buenas")) {
-                return { text: "¡Hola! 😊 ¿En qué te puedo ayudar hoy?", suggestions: ["💰 Ver precios", "🚚 Envíos"] };
-            }
+            <a href="{% url 'productos_categoria' 'acuicolas' %}"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 text-white">
+                <span class="text-2xl">🐟</span> Acuícolas
+            </a>
 
-            if (text.includes("gracias") || text.includes("chao")) {
-                return { text: "¡Gracias a ti! 💚 Estamos para servirte.", suggestions: [] };
-            }
-            
-            // --- FALLBACK ---
-            return {
-                text: "Entiendo. 🤔 Para darte una mejor respuesta, ¿prefieres ver los precios o hablar con alguien?",
-                suggestions: ["💰 Ver precios", "📞 Hablar con Asesor"]
-            };
-        };
+            <a href="{% url 'productos_categoria' 'pesqueros' %}"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 text-white">
+                <span class="text-2xl">🦐</span> Pesqueros
+            </a>
 
-      });
-    </script>
-  </body>
+            <a href="{% url 'productos_categoria' 'ganaderos' %}"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 text-white">
+                <span class="text-2xl">🥩</span> Ganaderos
+            </a>
+
+            <a href="{% url 'productos_categoria' 'vegetales' %}"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 text-white">
+                <span class="text-2xl">🥬</span> Vegetales
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- =====================================================
+                     MENSAJES DJANGO
+===================================================== -->
+{% if messages %}
+<div class="container mx-auto px-6 mt-4">
+    {% for message in messages %}
+    <div class="mb-4 p-4 rounded-lg shadow-lg
+        {% if message.tags == 'success' %}bg-green-100 border-l-4 border-green-500 text-green-700
+        {% elif message.tags == 'error' %}bg-red-100 border-l-4 border-red-500 text-red-700
+        {% elif message.tags == 'warning' %}bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700
+        {% else %}bg-blue-100 border-l-4 border-blue-500 text-blue-700{% endif %}">
+        <div class="flex items-center justify-between">
+            <p class="font-medium">{{ message }}</p>
+            <button onclick="this.parentElement.parentElement.remove()"
+                    class="ml-4 text-2xl font-bold hover:opacity-70">×</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- =====================================================
+                       CONTENIDO
+===================================================== -->
+<main class="flex-grow bg-gray-50">
+    {% block content %}{% endblock %}
+</main>
+
+<!-- =====================================================
+                          FOOTER
+===================================================== -->
+<footer class="bg-gray-900 text-gray-300 mt-auto">
+    <div class="container mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+            <div>
+                <h3 class="text-xl font-bold text-white mb-3">Mercado Sostenible</h3>
+                <p class="text-gray-400">
+                    Conectando productores con consumidores conscientes.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-3">Categorías</h3>
+                <ul class="space-y-2">
+                    <li><a class="hover:text-white" href="{% url 'productos_categoria' 'acuicolas' %}">Acuícolas</a></li>
+                    <li><a class="hover:text-white" href="{% url 'productos_categoria' 'pesqueros' %}">Pesqueros</a></li>
+                    <li><a class="hover:text-white" href="{% url 'productos_categoria' 'ganaderos' %}">Ganaderos</a></li>
+                    <li><a class="hover:text-white" href="{% url 'productos_categoria' 'vegetales' %}">Vegetales</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-3">Contacto</h3>
+                <p>📧 info@mercadosostenible.com</p>
+                <p>📞 +593 123 456 789</p>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-3">Síguenos</h3>
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 bg-white/10 rounded-lg"></div>
+                    <div class="w-10 h-10 bg-white/10 rounded-lg"></div>
+                    <div class="w-10 h-10 bg-white/10 rounded-lg"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+<!-- CHATBOT: botón flotante y ventana de chat -->
+<button id="chat-toggle-button" aria-label="Abrir chat" class="fixed bottom-6 right-6 z-50 bg-forest-green text-white p-4 rounded-full shadow-xl hover:scale-105">
+    💬
+</button>
+
+<div id="chat-window" class="hidden fixed bottom-20 right-6 z-50 w-80 md:w-96 h-96 bg-white flex-col overflow-hidden">
+    <div class="flex items-center justify-between px-4 py-3 border-b">
+        <div class="text-sm font-semibold text-forest-green">Asistente — Mercado Sostenible</div>
+        <button id="chat-close-button" class="text-gray-500 hover:text-gray-800">✕</button>
+    </div>
+    <div id="chat-messages" class="flex-1 p-3 overflow-y-auto bg-gray-50"></div>
+    <div class="px-3 py-2 border-t bg-white">
+        <div class="flex gap-2">
+            <input id="chat-input" type="text" class="flex-1 px-3 py-2 border rounded-lg" placeholder="Escribe tu mensaje..." />
+            <button id="chat-send-button" class="bg-forest-green text-white px-4 py-2 rounded-lg" disabled>Enviar</button>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>

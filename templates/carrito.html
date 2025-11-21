@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Carrito de Compras - Mercado Sostenible{% endblock %}
+
+{% block content %}
+<script src="{% static 'carrito.js' %}"></script>
+
+<div class="container mx-auto px-6 py-10 min-h-screen">
+
+    <h1 class="text-4xl font-bold mb-8 text-forest-green flex items-center gap-3">
+        🛒 Carrito de Compras
+    </h1>
+
+    {% if productos %}
+    <div class="bg-white shadow-2xl rounded-2xl p-6 md:p-8 border border-gray-100">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="border-b-2 border-gray-200 bg-gray-50">
+                        <th class="py-4 px-4 font-bold text-gray-700">Producto</th>
+                        <th class="py-4 px-4 text-center font-bold text-gray-700">Cantidad</th>
+                        <th class="py-4 px-4 text-center font-bold text-gray-700">Precio</th>
+                        <th class="py-4 px-4 text-center font-bold text-gray-700">Subtotal</th>
+                        <th class="py-4 px-4 text-center font-bold text-gray-700">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in productos %}
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                        <td class="py-4 px-4">
+                            <div class="font-semibold text-gray-800">{{ item.producto.nombre }}</div>
+                            <div class="text-sm text-gray-500">{{ item.producto.categoria }}</div>
+                        </td>
+
+                        <td class="py-4 px-4">
+                            <div class="flex items-center justify-center gap-3">
+                                <!-- Botón disminuir -->
+                                <form action="{% url 'agregar_carrito' item.producto.id %}" method="post" class="form-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" name="action" value="decrease"
+                                        class="w-8 h-8 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all flex items-center justify-center font-bold shadow-md hover:shadow-lg">
+                                        −
+                                    </button>
+                                </form>
+
+                                <span class="px-4 py-1 bg-gray-100 rounded-lg font-bold text-gray-700 min-w-[3rem] text-center">
+                                    {{ item.cantidad }}
+                                </span>
+
+                                <!-- Botón aumentar -->
+                                <form action="{% url 'agregar_carrito' item.producto.id %}" method="post" class="form-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" name="action" value="increase"
+                                        class="w-8 h-8 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all flex items-center justify-center font-bold shadow-md hover:shadow-lg">
+                                        +
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+
+                        <td class="py-4 px-4 text-center text-gray-700">
+                            ${{ item.producto.precio }}
+                        </td>
+
+                        <td class="py-4 px-4 text-center font-bold text-forest-green text-lg">
+                            ${{ item.subtotal }}
+                        </td>
+
+                        <td class="py-4 px-4 text-center">
+                            <a href="{% url 'eliminar_item' item.producto.id %}"
+                                class="inline-block px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all shadow-md hover:shadow-lg font-medium">
+                                🗑️ Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-8 pt-6 border-t-2 border-gray-200">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <a href="{% url 'vaciar_carrito' %}"
+                    class="px-6 py-3 bg-gray-700 text-white rounded-xl hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl font-bold">
+                    🗑️ Vaciar carrito
+                </a>
+
+                <div class="text-right">
+                    <p class="text-gray-600 text-sm mb-1">Total a pagar:</p>
+                    <p class="text-4xl font-extrabold text-forest-green">${{ total }}</p>
+                </div>
+            </div>
+
+            <div class="mt-6 flex flex-col md:flex-row gap-4">
+                <a href="{% url 'principal' %}"
+                    class="flex-1 text-center px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all font-bold border-2 border-gray-300">
+                    ← Seguir comprando
+                </a>
+                <form method="POST" action="{% url 'finalizar_compra' %}" class="flex-1" onsubmit="return confirmarCompra()">
+                    {% csrf_token %}
+                    <button type="submit"
+                        class="w-full px-6 py-3 bg-gradient-to-r from-forest-green to-leaf-green text-white rounded-xl hover:from-leaf-green hover:to-forest-green transition-all shadow-lg hover:shadow-xl font-bold text-lg">
+                        💳 Finalizar Compra
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript movido a static/carrito.js -->
+
+    {% else %}
+    <div class="bg-white shadow-xl rounded-2xl p-12 text-center border border-gray-100">
+        <div class="text-6xl mb-4">🛒</div>
+        <p class="text-2xl text-gray-600 mb-6">Tu carrito está vacío</p>
+        <p class="text-gray-500 mb-8">¡Agrega productos para empezar a comprar!</p>
+        <a href="{% url 'principal' %}"
+            class="inline-block px-8 py-4 bg-gradient-to-r from-forest-green to-leaf-green text-white rounded-xl hover:from-leaf-green hover:to-forest-green transition-all shadow-lg hover:shadow-xl font-bold text-lg">
+            🛍️ Ver productos
+        </a>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

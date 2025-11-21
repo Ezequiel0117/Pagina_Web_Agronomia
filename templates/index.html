@@ -7,7 +7,7 @@
     <!-- Hero Section -->
     <section class="relative overflow-hidden py-20 bg-gradient-to-br from-sky-blue via-forest-green to-leaf-green">
         <div class="absolute inset-0 opacity-20">
-            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.4&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            <div class="absolute inset-0 hero-pattern-bg"></div>
         </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center text-white fade-in-up">
@@ -21,9 +21,6 @@
                 <div class="flex gap-4 justify-center flex-wrap">
                     <a href="#productos" class="btn-modern bg-white text-forest-green px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
                         Ver Productos
-                    </a>
-                    <a href="#contacto" class="btn-modern bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-forest-green transition-all duration-300">
-                        Contáctanos
                     </a>
                 </div>
             </div>
@@ -62,9 +59,9 @@
                             $12.50 / kg
                         </span>
                     </div>
-                    <button class="btn-modern w-full bg-gradient-to-r from-sky-blue to-forest-green text-white font-bold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-green-600 shadow-lg hover:shadow-xl transition-all duration-300">
-                        🛒 Comprar Ahora
-                    </button>
+                    <a href="{% url 'productos_categoria' 'acuicolas' %}" class="btn-modern w-full bg-gradient-to-r from-sky-blue to-forest-green text-white font-bold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-green-600 shadow-lg hover:shadow-xl transition-all duration-300 block text-center">
+                        🛒 Ver Productos
+                    </a>
                 </div>
             </div>
 
@@ -87,9 +84,9 @@
                             $18.00 / kg
                         </span>
                     </div>
-                    <button class="btn-modern w-full bg-gradient-to-r from-sky-blue to-blue-800 text-white font-bold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-blue-900 shadow-lg hover:shadow-xl transition-all duration-300">
-                        🛒 Comprar Ahora
-                    </button>
+                    <a href="{% url 'productos_categoria' 'pesqueros' %}" class="btn-modern w-full bg-gradient-to-r from-sky-blue to-blue-800 text-white font-bold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-blue-900 shadow-lg hover:shadow-xl transition-all duration-300 block text-center">
+                        🛒 Ver Productos
+                    </a>
                 </div>
             </div>
 
@@ -112,9 +109,9 @@
                             $9.75 / kg
                         </span>
                     </div>
-                    <button class="btn-modern w-full bg-gradient-to-r from-earth-taupe to-golden-harvest text-white font-bold py-3 px-6 rounded-xl hover:from-yellow-600 hover:to-yellow-800 shadow-lg hover:shadow-xl transition-all duration-300">
-                        🛒 Comprar Ahora
-                    </button>
+                    <a href="{% url 'productos_categoria' 'ganaderos' %}" class="btn-modern w-full bg-gradient-to-r from-earth-taupe to-golden-harvest text-white font-bold py-3 px-6 rounded-xl hover:from-yellow-700 hover:to-yellow-800 shadow-lg hover:shadow-xl transition-all duration-300 block text-center">
+                        🛒 Ver Productos
+                    </a>
                 </div>
             </div>
 
@@ -137,9 +134,9 @@
                             $3.50 / kg
                         </span>
                     </div>
-                    <button class="btn-modern w-full bg-gradient-to-r from-leaf-green to-forest-green text-white font-bold py-3 px-6 rounded-xl hover:from-green-600 hover:to-green-800 shadow-lg hover:shadow-xl transition-all duration-300">
-                        🛒 Comprar Ahora
-                    </button>
+                    <a href="{% url 'productos_categoria' 'vegetales' %}" class="btn-modern w-full bg-gradient-to-r from-leaf-green to-forest-green text-white font-bold py-3 px-6 rounded-xl hover:from-green-600 hover:to-green-800 shadow-lg hover:shadow-xl transition-all duration-300 block text-center">
+                        🛒 Ver Productos
+                    </a>
                 </div>
             </div>
 
@@ -180,9 +177,9 @@
             <p class="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
                 Únete a miles de clientes satisfechos que ya disfrutan de productos frescos y sostenibles
             </p>
-            <button class="btn-modern bg-white text-forest-green px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+            <a href="{% url 'productos_categoria' 'ganaderos' %}" class="btn-modern bg-white text-forest-green px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
                 Comenzar Ahora 🚀
-            </button>
+            </a>
         </div>
     </section>
 {% endblock %}
